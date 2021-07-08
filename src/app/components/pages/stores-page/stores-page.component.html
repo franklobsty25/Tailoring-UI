@@ -1,0 +1,41 @@
+<div class="page-title-area" *ngFor="let Content of pageTitle;" style="background-image: url({{Content.bgImage}});">
+    <div class="container">
+        <h1>{{Content.title}}</h1>
+    </div>
+</div>
+
+<div class="popular-store-area ptb-100">
+    <div class="container">
+        <div class="filter-block">
+            <div class="row align-items-center">
+                <div class="col-lg-8 col-md-7">
+                    <ul>
+                        <li><a routerLink="/all-stores" class="active">All</a></li>
+                        <li><a routerLink="/all-stores">A</a></li>
+                        <li><a routerLink="/all-stores">B</a></li>
+                        <li><a routerLink="/all-stores">C</a></li>
+                        <li><a routerLink="/all-stores">D</a></li>
+                        <li><a routerLink="/all-stores">Z</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-5">
+                    <form>
+                        <input type="text" class="form-control" placeholder="Search stores">
+                        <button type="submit"><i class='bx bx-search-alt'></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="popular-store-list">
+            <div class="row">
+                <div class="col-lg-3 col-sm-4 col-6 col-md-4" *ngFor="let Item of popularStoreList;">
+                    <div class="item">
+                        <a routerLink="/{{Item.link}}">
+                            <img [src]="Item.image" alt="image">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

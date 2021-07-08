@@ -1,0 +1,73 @@
+<div class="page-title-area" *ngFor="let Content of pageTitle;" style="background-image: url({{Content.bgImage}});">
+    <div class="container">
+        <h1>{{Content.title}}</h1>
+    </div>
+</div>
+
+<div class="cart-area ptb-100">
+    <div class="container">
+        <div class="alert alert-info" *ngIf="message">{{message}} <strong><a routerLink="/profile-authentication">click to login.</a></strong></div>
+        <form>
+            <div class="cart-table table-responsive">
+                <table class="table table-bordered" *ngIf="len > 0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Image</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let cart of carts">
+                        <tr>
+                            <td class="product-thumbnail">
+                                <a [routerLink]="['/deals-details', cart.productId]">
+                                    <img src="{{environment.apiUrl}}/images/design/{{cart.image}}" alt="{{cart.image}}">
+                                </a>
+                            </td>
+                            <td class="product-name">
+                                <a [routerLink]="['/deals-details', cart.productId]">{{cart.name}}</a>
+                            </td>
+                            <td class="product-price">
+                                <span class="unit-amount">GHS {{cart.price}}.00</span>
+                            </td>
+                            <td class="product-quantity">
+                                <div class="input-counter">
+                                    <input type="number" min="1" value="{{cart.quantity}}" (change)="onChangeEvent($event, cart)">
+                                </div>
+                            </td>
+                            <td class="product-subtotal">
+                                <span class="subtotal-amount">GHS {{cart.total}}.00</span>
+                                <a (click)="deleteCart(cart._id)" class="remove"><i class='bx bx-trash'></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="cart-buttons">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 col-sm-7 col-md-7">
+                        <div class="shopping-coupon-code">
+                            <input type="text" class="form-control" placeholder="Coupon code" name="coupon-code" id="coupon-code">
+                            <button type="submit">Apply Coupon</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-sm-5 col-md-5 text-end">
+                        <a routerLink="" class="default-btn">Continue shopping</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-totals">
+                <h3>Cart Totals</h3>
+                <ul>
+                    <li>Subtotal <span>GHS {{subtotal}}.00</span></li>
+                    <li>Delivery fee <span>GHS {{delivery}}.00</span></li>
+                    <li>Total <span>GHS {{total}}.00</span></li>
+                </ul>
+                <a [routerLink]="['/checkout', token]" class="default-btn">Proceed to Checkout</a>
+            </div>
+        </form>
+    </div>
+</div>

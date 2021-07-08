@@ -1,0 +1,85 @@
+<div class="navbar-area navbar-style-two" ngStickyNav stickyClass="sticky-box-shadow" ngStickyNav>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" [class.active]="classApplied">
+            <a class="navbar-brand" routerLink="/"><img src="assets/img/logo.png" alt="logo"></a>
+            <button class="navbar-toggler" type="button" (click)="toggleClass()">
+                <span class="burger-menu">
+                    <span class="top-bar"></span>
+                    <span class="middle-bar"></span>
+                    <span class="bottom-bar"></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- <form class="search-box">
+                    <label><i class='bx bx-search'></i></label>
+                    <input type="text" class="input-search" placeholder="Search...">
+                </form> -->
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a routerLink="/" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Home</a>
+                        <!-- <ul class="dropdown-menu">
+                            <li class="nav-item"><a routerLink="/" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Home Demo - 1</a></li>
+                            <li class="nav-item"><a routerLink="/index-2" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Home Demo - 2</a></li>
+                            <li class="nav-item"><a routerLink="/index-3" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Home Demo - 3</a></li>
+                        </ul> -->
+                    </li>
+                    <!-- <li class="nav-item"><a routerLink="/products-list" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Gallery</a></li>
+                    <li class="nav-item megamenu"><a href="javascript:void(0)" class="dropdown-toggle nav-link">Deals</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="submenu-title">Top Locations</h6>
+                                        <ul class="megamenu-submenu">
+                                            <li><a routerLink="/search-page">South Island <span class="count">6</span></a></li>
+                                            <li><a routerLink="/search-page">Paris <span class="count">5</span></a></li>
+                                            <li><a routerLink="/search-page">Bora Bora <span class="count">4</span></a></li>
+                                            <li><a routerLink="/search-page">London <span class="count">3</span></a></li>
+                                            <li><a routerLink="/search-page">Maui <span class="count">2</span></a></li>
+                                            <li><a routerLink="/search-page">Tahiti <span class="count">1</span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <h6 class="submenu-title">Top Categories</h6>
+                                        <ul class="megamenu-submenu">
+                                            <li><a routerLink="/search-page">Accessories <span class="count">1</span></a></li>
+                                            <li><a routerLink="/search-page">Entertainment <span class="count">2</span></a></li>
+                                            <li><a routerLink="/search-page">Beauty <span class="count">3</span></a></li>
+                                            <li><a routerLink="/search-page">Clothing <span class="count">4</span></a></li>
+                                            <li><a routerLink="/search-page">Computers <span class="count">5</span></a></li>
+                                            <li><a routerLink="/search-page">Photography <span class="count">6</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li> -->
+                    <!-- <li class="nav-item"><a routerLink="/how-it-works" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">About Us</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a routerLink="/all-stores" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Stores</a></li>
+                            <li class="nav-item"><a routerLink="/stores-details" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Stores Details</a></li>
+                            <li class="nav-item"><a routerLink="/coupons" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Coupons</a></li>
+                        </ul>
+                    </li> -->
+                    <!-- <li class="nav-item"><a routerLink="/contact" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Contact</a></li> -->
+                    <li class="nav-item"><a href="javascript:void(0)" class="dropdown-toggle nav-link">Account</a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item"><a routerLink="/dashboard" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">My Dashboard</a></li>
+                            <!-- <li class="nav-item"><a routerLink="/dashboard-profile" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">My Profile</a></li>
+                            <li class="nav-item"><a routerLink="/dashboard-store" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">My Store</a></li>
+                            <li class="nav-item"><a routerLink="/dashboard-coupons" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">My Coupons</a></li>
+                            <li class="nav-item"><a routerLink="/dashboard-deals" class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">My Deals</a></li> -->
+                        </ul>
+                    </li>
+                </ul>
+                <div class="others-option d-flex align-items-center">
+                    <div class="option-item">
+                        <a routerLink="/cart" class="wishlist-btn"><i class='bx bx-heart'></i></a>
+                    </div>
+                    <div class="option-item">
+                        <a routerLink="/cart" class="cart-btn"><i class='bx bx-shopping-bag'></i>{{len}}</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

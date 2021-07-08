@@ -1,0 +1,304 @@
+<div class="page-title-area" *ngFor="let Content of pageTitle;" style="background-image: url({{Content.bgImage}});">
+    <div class="container">
+        <h1>{{Content.title}}</h1>
+    </div>
+</div>
+
+<div class="checkout-area ptb-100">
+    <div class="container">
+        <form novalidate [formGroup]="userForm" #detailForm="ngForm" (ngSubmit)="onSubmitUserDetail()">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="billing-details">
+                        <h3 class="title">Billing Details</h3>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>Country <span class="required">*</span></label>
+                                    <div class="select-box">
+                                        <select formControlName="country">
+                                            <option value="Ghana">Ghana</option>
+                                            <option value="Nigeria">Nigeria</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>First Name <span class="required">*</span></label>
+                                    <input type="text" class="form-control" formControlName="firstName" required>
+                                    <div style="color: red;" *ngIf="formErrors.firstName">{{formErrors.firstName}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Last Name <span class="required">*</span></label>
+                                    <input type="text" class="form-control" formControlName="lastName" required>
+                                    <div style="color: red;" *ngIf="formErrors.lastName">{{formErrors.lastName}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-6">
+                                <div class="form-group">
+                                    <label>Digital GPS Address <span class="required">*</span></label>
+                                    <input type="text" class="form-control" formControlName="address" required>
+                                    <div style="color: red;" *ngIf="formErrors.address">{{formErrors.address}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-6">
+                                <div class="form-group">
+                                    <label>Town / City <span class="required">*</span></label>
+                                    <input type="text" class="form-control" formControlName="townCity" required>
+                                    <div style="color: red;" *ngIf="formErrors.townCity">{{formErrors.townCity}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <input type="text" class="form-control" formControlName="state">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Postcode / Zip</label>
+                                    <input type="text" class="form-control" formControlName="postalCodeZip">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Email Address <span class="required">*</span></label>
+                                    <input type="email" class="form-control" formControlName="username" required>
+                                    <div style="color: red;" *ngIf="formErrors.username">{{formErrors.username}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Phone <span class="required">*</span></label>
+                                    <input type="text" class="form-control" formControlName="phoneNumber" required>
+                                    <div style="color: red;" *ngIf="formErrors.phoneNumber">{{formErrors.phoneNumber}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="ship-different-address" formControlName="differentAddress">
+                                    <label class="form-check-label" for="ship-different-address">Deliver to a different address?</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <textarea name="notes" id="notes" cols="30" rows="5" placeholder="Order Notes" formControlName="orderNote" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 col-md-12">
+                    <div class="order-details">
+                        <h3 class="title">Your Order</h3>
+                        <div class="order-table table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let cart of carts">
+                                        <td class="product-name">
+                                            <a [routerLink]="['/deals-details', cart.productId]" *ngIf="cart.name">{{ cart.name }}</a>
+                                        </td>
+                                        <td class="product-total">
+                                            <span class="subtotal-amount" *ngIf="cart.productId">GHS {{ cart.price }}.00</span>
+                                        </td>
+                                    </tr>
+                                    <!-- Product order straight-->
+                                    <tr *ngIf="product">
+                                        <td class="product-name">
+                                            <a [routerLink]="['/deals-details', product._id]" *ngIf="product.name">{{ product.name }}</a>
+                                        </td>
+                                        <td class="product-total">
+                                            <span class="subtotal-amount" *ngIf="product.price">GHS {{ product.price }}.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="order-subtotal">
+                                            <span>Subtotal</span>
+                                        </td>
+                                        <td class="order-subtotal-price">
+                                            <span class="order-subtotal-amount">GHS {{ subtotal }}.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="order-shipping">
+                                            <span>Delivery fee</span>
+                                        </td>
+                                        <td class="shipping-price">
+                                            <span>GHS {{ delivery }}.00</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="total-price">
+                                            <span>Order Total</span>
+                                        </td>
+                                        <td class="product-subtotal">
+                                            <span class="subtotal-amount">GHS {{ total }}.00</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="payment-box">
+                            <div class="payment-method">
+                                <p>
+                                    <input type="radio" id="direct-bank-transfer" name="radio-group" checked>
+                                    <label for="direct-bank-transfer">Paystack</label>
+                                    Please provide your measurements below before placing order. <strong>&nbsp;Thank you!</strong>
+                                </p>
+                            </div>
+                            <button type="submit" [disabled]="!userForm.valid" class="default-btn"
+                            angular4-paystack
+                            key="pk_test_92784a755bd25e05955c24822f297dee168ccde6"
+                            [email]="email"
+                            [amount]="pay"
+                            [currency]="currency"
+                            [ref]="reference"
+                            [metadata]="metadata"
+                            (paymentInit)="paymentInit()"
+                            (onClose)="paymentCancel()"
+                            (callback)="paymentDone($event)">Place Order</button>
+                            <img src="assets/img/paystack-memberpress-preview.png" alt="paystack"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- Shirt Measurement form -->
+        <div class="user-actions"></div>
+        <form [formGroup]="topForm" #top="ngForm" (ngSubmit)="onSubmitTopMeasurement()">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="billing-details">
+                        <h3 class="title">Your Measurement Details</h3>
+                        <div class="row">
+                            <div class="alert alert-danger" *ngIf="errorTop">{{errorTop}}</div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <h6>Shirt long/short sleeve Measurement</h6>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Length <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="length" (change)="onlengthChange($event)" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Back <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="back" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Sleeve <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="sleeve" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Chest/Bust <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="chest" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Around arm <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="aroundArm" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Cuff <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="cuff" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <textarea name="notes" id="notes" cols="30" rows="5" placeholder="Additional notes (Optional)" class="form-control" formControlName="additionalNotes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form><small><strong>Please Note:</strong> Price will vary due to body measurement.</small>
+        <!-- End of Shirt Measurement form -->
+        <!-- Trouder Measurement form -->
+        <div class="user-actions"></div>
+        <form [formGroup]="downForm" #down="ngForm" (ngSubmit)="onSubmitDownMeasurement()">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="billing-details">
+                        <div class="row">
+                            <div class="alert alert-danger" *ngIf="errorDown">{{errorDown}}</div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <h6>Trouser/Shorts Measurement</h6>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Length <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="length" (change)="onlengthChange($event)" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Waist <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="waist" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Thighs <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="thighs" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Bass <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="bass" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Seat/Hip <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="seat" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Knee <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="knee" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-6">
+                                <div class="form-group">
+                                    <label>Flap <span class="required">*</span></label>
+                                    <input type="number" class="form-control" formControlName="flap" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <textarea name="notes" id="notes" cols="30" rows="5" placeholder="Additional notes (Optional)" class="form-control" formControlName="additionalNotes"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form><small><strong>Please Note:</strong> Price will vary due to body measurement.</small>
+        <!-- End of Trouser Measurement form -->
+    </div>
+</div>

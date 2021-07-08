@@ -1,0 +1,50 @@
+<div class="top-header-area">
+    <div class="container-fluid {{containerClass}}">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6">
+                <ul class="top-header-contact-info">
+                    <!-- <li><a href="tel:+233247202968"><i class='bx bx-phone-call'></i> +233 247 202 968</a></li> -->
+                    <li><a href="mailto:info@tailoringhub.com"><i class='bx bx-envelope'></i> info@tailoringhub.com</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="top-header-right">
+                    <ul class="d-flex align-items-center justify-content-end">
+                        <li>
+                            <div class="dropdown language-switcher d-inline-block" [class.active]="classApplied">
+                                <button class="dropdown-toggle" type="button" (click)="toggleClass()">
+                                    <img src="assets/img/flag/us.jpg" class="shadow" alt="image">
+                                    <span>Eng <i class='bx bx-chevron-down'></i></span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="#" class="dropdown-item d-flex align-items-center">
+                                        <img src="assets/img/flag/germany.jpg" class="shadow-sm" alt="flag">
+                                        <span>Ger</span>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex align-items-center">
+                                        <img src="assets/img/flag/france.jpg" class="shadow-sm" alt="flag">
+                                        <span>Fre</span>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex align-items-center">
+                                        <img src="assets/img/flag/spain.jpg" class="shadow-sm" alt="flag">
+                                        <span>Spa</span>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex align-items-center">
+                                        <img src="assets/img/flag/russia.jpg" class="shadow-sm" alt="flag">
+                                        <span>Rus</span>
+                                    </a>
+                                    <a href="#" class="dropdown-item d-flex align-items-center">
+                                        <img src="assets/img/flag/italy.jpg" class="shadow-sm" alt="flag">
+                                        <span>Ita</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a routerLink="/profile-authentication"><i class='bx bx-log-in'></i> Sign In</a></li>
+                        <li><a routerLink="/profile-authentication"><i class='bx bx-user'></i> Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

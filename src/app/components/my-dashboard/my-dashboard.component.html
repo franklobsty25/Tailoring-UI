@@ -1,0 +1,83 @@
+<div class="page-title-area" *ngFor="let Content of pageTitle;" style="background-image: url({{Content.bgImage}});">
+    <div class="container">
+        <h1>{{Content.title}}</h1>
+    </div>
+</div>
+
+<div class="dashboard-area ptb-100">
+    <div class="container">
+        <div class="dashboard-tabs-list">
+            <ul>
+                <li><a routerLink="/dashboard" class="active">Dashboard</a></li>
+                <li><a routerLink="/dashboard-profile">Profile</a></li>
+                <li><a routerLink="/dashboard-store">Custom design</a></li>
+                <li><a routerLink="/dashboard-coupons">Measurement</a></li>
+                <!-- <li><a routerLink="/dashboard-deals">Deals</a></li>
+                <li><a routerLink="/dashboard-vouchers">Vouchers</a></li>
+                <li><a routerLink="/dashboard-agents">Agents</a></li> -->
+                <li><a routerLink="/profile-authentication" (click)="logOut()">Logout</a></li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-12">
+                <div class="dashboard-profile-box" *ngIf="user">
+                    <div class="image">
+                        <img src="{{photoUrl}}" alt="{{user.photoUrl}}">
+                        <span>{{user.firstName}} {{user.lastName}}</span>
+                    </div>
+                    <a (click)="logOut()" class="logout">Log Out</a>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-12" *ngIf="user">
+                <div class="dashboard-stats">
+                    <p>Hi <strong class="name">{{user.firstName}} {{user.lastName}}</strong> here's quick overview of your delivery time out.</p>
+
+                    <div class="offer-timer" *ngIf="days >= 0">
+                        <p>Time Left - For delivery!</p>
+                        <div id="timer" class="flex-wrap d-flex justify-content-center">
+                            <div id="days" class="align-items-center flex-column d-flex justify-content-center">{{days}} <span>Days</span></div>
+                            <div id="hours" class="align-items-center flex-column d-flex justify-content-center">{{hours}} <span>Hours</span></div>
+                            <div id="minutes" class="align-items-center flex-column d-flex justify-content-center">{{minutes}} <span>Minutes</span></div>
+                            <div id="seconds" class="align-items-center flex-column d-flex justify-content-center">{{seconds}} <span>Seconds</span></div>
+                        </div>
+                    </div>
+
+                    <!-- <ul class="stats">
+                        <li>
+                            <div class="icon">
+                                <i class='bx bx-bar-chart-alt-2'></i>
+                            </div>
+                            Sales: <span class="badge">540</span>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <i class='bx bx-purchase-tag'></i>
+                            </div>
+                            Coupons: <span class="badge">55</span>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <i class='bx bxs-hand-right'></i>
+                            </div>
+                            Deals: <span class="badge">5</span>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <i class='bx bx-dollar-circle'></i>
+                            </div>
+                            Earnings Due: <span class="badge">$54,541</span>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <i class='bx bx-dollar'></i>
+                            </div>
+                            Earnings Sent: <span class="badge">$1,000</span>
+                        </li>
+                    </ul> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

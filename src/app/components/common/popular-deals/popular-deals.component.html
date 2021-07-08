@@ -1,0 +1,48 @@
+<div class="container" *ngIf="len > 0">
+    <div class="section-title text-start" *ngFor="let Title of sectionTitle;">
+        <h2>{{Title.title}}</h2>
+        <p>{{Title.paragraph}}</p>
+    </div>
+
+    <div class="deals-slides">
+        <owl-carousel-o [options]="dealsSlides">
+            <ng-template carouselSlide *ngFor="let product of products;">
+                <div class="single-deals-box">
+                    <div class="deals-image">
+                        <a [routerLink]="['/deals-details', product._id]" class="d-block">
+                            <img src="{{environment.apiUrl}}/images/design/{{product.image}}" alt="{{product.image}}">
+                        </a>
+                        <a href="javascript:void(0)" class="bookmark-save"><i class='bx bx-heart'></i></a>
+                        <div class="discount" *ngIf="product.discount > 0">{{product.discount}}</div>
+                    </div>
+                    <div class="deals-content">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="rating" *ngIf="product.reviews.length > 0">
+                                <span *ngIf="product.reviews.length == ratingOneStar.one"><i class="{{ratingOneStar.icon}}"></i></span>
+                                <span *ngIf="product.reviews.length == 2"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingTwoStars"></i></span>
+                                <span *ngIf="product.reviews.length == 3"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingThreeStars"></i></span>
+                                <span *ngIf="product.reviews.length == 4"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingFourStars"></i></span>
+                                <span *ngIf="product.reviews.length >= 5"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingStars"></i></span>
+                                <span class="count">({{product.reviews.length}})</span>
+                            </div>
+                            <!-- <div class="status">
+                                <span *ngIf="Content.trending"><i class='bx bx-trending-up'></i> {{Content.trending}}</span>
+                            </div> -->
+                        </div>
+                        <small>GHS {{product.xsmallSize}}.00 - GHS {{product.xxlargeSize}}.00</small>
+                        <span class="location"><i class='bx bxs-time'></i>Delivery time: {{product.duration}} days</span>
+                    </div>
+                    <div class="box-footer">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="price">
+                                <span class="new-price"><a [routerLink]="['/deals-details', product._id]">{{product.name}}</a></span>
+                                <!-- <span class="old-price" *ngIf="product.data.oldPrice">{{product.data.oldPrice}}</span> -->
+                            </div>
+                            <a [routerLink]="['/deals-details', product._id]" class="details-btn">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+</div>

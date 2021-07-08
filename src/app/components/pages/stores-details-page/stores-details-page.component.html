@@ -1,0 +1,92 @@
+<div class="page-title-area" *ngFor="let Content of pageTitle;" style="background-image: url({{Content.bgImage}});">
+    <div class="container">
+        <h1>{{Content.title}}</h1>
+    </div>
+</div>
+
+<div class="deals-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-8 col-md-12">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-sm-6 col-md-6" *ngFor="let Content of singleDealsBox | paginate: { itemsPerPage: 12, currentPage: dealsGrid }">
+                        <div class="single-deals-box">
+                            <div class="deals-image">
+                                <a routerLink="/{{Content.detailsLink}}" class="d-block">
+                                    <img [src]="Content.image" alt="image">
+                                </a>
+                                <a href="javascript:void(0)" class="bookmark-save"><i class='bx bx-heart'></i></a>
+                                <div class="discount" *ngIf="Content.discount">{{Content.discount}}</div>
+                                <a routerLink="/{{Content.detailsLink}}" class="show-coupon-code" target="_blank" ngxClipboard [cbContent]="[Content.couponCode]" [container]="container" tooltip="Click to Copy" placement="right" show-delay="100" *ngIf="Content.couponCode">Show Coupon Code</a>
+                            </div>
+                            <div class="deals-content">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="rating">
+                                        <i class="{{Icon.icon}}" *ngFor="let Icon of Content.ratingStar"></i>
+                                        <span class="count">({{Content.ratingCount}})</span>
+                                    </div>
+                                    <div class="status">
+                                        <span *ngIf="Content.trending"><i class='bx bx-trending-up'></i> {{Content.trending}}</span>
+                                    </div>
+                                </div>
+                                <h3><a routerLink="/{{Content.detailsLink}}">{{Content.title}}</a></h3>
+                                <span class="location"><i class='bx bxs-map'></i> {{Content.location}}</span>
+                            </div>
+                            <div class="box-footer">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="price">
+                                        <span class="new-price">{{Content.newPrice}}</span>
+                                        <span class="old-price" *ngIf="Content.oldPrice">{{Content.oldPrice}}</span>
+                                    </div>
+                                    <a routerLink="/{{Content.detailsLink}}" class="details-btn">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="pagination-area text-center">
+                            <pagination-controls previousLabel="" nextLabel="" (pageChange)="dealsGrid = $event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-12">
+                <aside class="widget-area">
+                    <div class="widget widget_about_store">
+                        <h3 class="widget-title">About The Store</h3>
+                        <div class="content">
+                            <img src="assets/img/popular-store/store1.png" alt="image">
+                            <p>Expound the actual teachings of the great explorer of the truth, the master-builder of human.</p>
+                            <a href="#" target="_blank" class="default-btn">Visit Store Website</a>
+                        </div>
+                    </div>
+                    <div class="widget widget_socials_link">
+                        <h3 class="widget-title">Stay Connected</h3>
+                        <ul>
+                            <li><a href="#" target="_blank"><i class='bx bxl-facebook'></i>Facebook</a></li>
+                            <li><a href="#" target="_blank"><i class='bx bxl-twitter'></i>Twitter</a></li>
+                            <li><a href="#" target="_blank"><i class='bx bxl-linkedin'></i>Linkedin</a></li>
+                        </ul>
+                    </div>
+                    <div class="widget widget_looking_for">
+                        <h3 class="widget-title">Deals or Coupons?</h3>
+                        <ul>
+                            <li>
+                                <input type="radio" id="all" name="lookingFor" value="lookingFor" checked>
+                                <label for="all">All</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="dealsOnly" name="lookingFor" value="lookingFor">
+                                <label for="dealsOnly">Deals Only</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="couponsOnly" name="lookingFor" value="lookingFor">
+                                <label for="couponsOnly">Coupons Only</label>
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>

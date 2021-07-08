@@ -1,0 +1,30 @@
+<div class="page-title-area" *ngFor="let Content of pageTitle;" style="background-image: url({{Content.bgImage}});">
+    <div class="container">
+        <h1>{{Content.title}}</h1>
+    </div>
+</div>
+
+<div class="how-it-works-area ptb-100">
+    <div class="container">
+        <div class="single-how-it-works-box" *ngFor="let Content of singleHowItWorkBox;">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 how-it-works-content">
+                    <h3>{{Content.title}}</h3>
+                    <p>{{Content.paragraph}}</p>
+                    <p>{{Content.paragraph2}}</p>
+                    <p>{{Content.paragraph3}}</p>
+                    <p>{{Content.paragraph4}}</p>
+                    <h3>{{Content.title2}}</h3>
+                    <p>{{Content.paragraph5}}</p>
+                    <h3>{{Content.title3}}</h3>
+                    <p>{{Content.paragraph6}}</p>
+                    <h3>{{Content.title4}}</h3>
+                    <p>{{Content.paragraph7}}</p>
+                </div>
+                <div class="col-lg-6 col-md-12 how-it-works-image">
+                    <img [src]="Content.img" alt="image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

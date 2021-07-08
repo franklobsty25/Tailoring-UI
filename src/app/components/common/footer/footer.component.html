@@ -1,0 +1,74 @@
+<footer class="footer-area pt-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-sm-6 col-md-6">
+                <div class="single-footer-widget" *ngFor="let Content of singleFooterWidget;">
+                    <a routerLink="/" class="logo d-inline-block">
+                        <img [src]="Content.logo" alt="image">
+                    </a>
+                    <p>{{Content.paragraph}}</p>
+                    <ul class="social-links">
+                        <li><a href="https://web.facebook.com/Tailoringhub-104061068610658" target="_blank"><i class="bx bxl-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/home" target="_blank"><i class="bx bxl-twitter"></i></a></li>
+                        <li><a href="https://www.linkedin.com/company/tailoringhub" target="_blank"><i class="bx bxl-linkedin"></i></a></li>
+                        <li><a href="#" target="_blank"><i class="bx bxl-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-md-6">
+                <div class="single-footer-widget pl-4">
+                    <h3>Useful Links</h3>
+                    <ul class="links-list">
+                        <li><a routerLink="/customer-service">Privacy Policy</a></li>
+                        <li><a routerLink="/customer-service">Return Policy</a></li>
+                        <li><a routerLink="/customer-service">Terms & Conditions</a></li>
+                        <li><a routerLink="/how-it-works">Get to know us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-md-6">
+                <div class="single-footer-widget">
+                    <h3>FAQ</h3>
+                    <ul class="links-list">
+                        <li><a href="#">Tailors</a></li>
+                        <li><a routerLink="/faq">FAQ</a></li>
+                        <!-- <li><a routerLink="/stores-details">Excavator</a></li>
+                        <li><a routerLink="/stores-details">The Bird</a></li>
+                        <li><a routerLink="/stores-details">Triple One</a></li>
+                        <li><a routerLink="/stores-details">Hi-Tech</a></li> -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 col-md-6">
+                <div class="single-footer-widget">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-contact-info links-list">
+                        <li>Address: Nii Ayi Kushie Ave, Tantra, Block 5, Accra - Ghana</li>
+                        <li>Email: <a href="mailto:info@tailoringhub.com">info@tailoringhub.com</a></li>
+                        <li><a routerLink="/contact">Message us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <p>Copyright @{{ marxaYear }} <!-- <strong>Marxa</strong> is Proudly Powered by <a href="https://envytheme.com/" target="_blank">EnvyTheme</a> --></p>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <ul>
+                        <li><a routerLink="/customer-service">Privacy Policy</a></li>
+                        <li><a routerLink="/customer-service">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

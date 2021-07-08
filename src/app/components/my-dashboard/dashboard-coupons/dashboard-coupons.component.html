@@ -1,0 +1,89 @@
+<div class="page-title-area" *ngFor="let Content of pageTitle;" style="background-image: url({{Content.bgImage}});">
+    <div class="container">
+        <h1>{{Content.title}}</h1>
+    </div>
+</div>
+
+<div class="dashboard-area ptb-100">
+    <div class="container">
+        <div class="dashboard-tabs-list">
+            <ul>
+                <li><a routerLink="/dashboard">Dashboard</a></li>
+                <li><a routerLink="/dashboard-profile">Profile</a></li>
+                <li><a routerLink="/dashboard-store">Custom design</a></li>
+                <li><a routerLink="/dashboard-coupons" class="active">Measurement</a></li>
+                <!-- <li><a routerLink="/dashboard-deals">Deals</a></li>
+                <li><a routerLink="/dashboard-vouchers">Vouchers</a></li>
+                <li><a routerLink="/dashboard-agents">Agents</a></li> -->
+                <li><a routerLink="/profile-authentication" (click)="logOut()">Logout</a></li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-12">
+                <div class="dashboard-profile-box" *ngIf="user">
+                    <div class="image">
+                        <img src="{{photoUrl}}" alt="{{user.photoUrl}}">
+                        <span>{{user.firstName}} {{user.lastName}}</span>
+                    </div>
+                    <a (click)="logOut()" class="logout">Log Out</a>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-12" *ngIf="top">
+                <div class="dashboard-stats">
+                    <!-- <a routerLink="/dashboard-add-coupon" class="default-btn">Add Coupon</a> -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <h6>Shirt long/short measurement</h6>
+                            <tbody>
+                                <tr>
+                                    <td>Length</td>
+                                    <td>Back</td>
+                                    <td>Sleeve</td>
+                                    <td>Chest</td>
+                                    <td>Around arm</td>
+                                    <td>Cuff</td>
+                                </tr>
+                                <tr *ngIf="user">
+                                    <td>{{top.length}}</td>
+                                    <td>{{top.back}}</td>
+                                    <td>{{top.sleeve}}</td>
+                                    <td>{{top.chest}}</td>
+                                    <td>{{top.aroundArm}}</td>
+                                    <td>{{top.cuff}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-responsive" *ngIf="down">
+                        <table class="table table-bordered">
+                            <h6>Trouser/shorts measurement</h6>
+                            <tbody>
+                                <tr>
+                                    <td>Length</td>
+                                    <td>Waist</td>
+                                    <td>Thighs</td>
+                                    <td>Bass</td>
+                                    <td>Seat</td>
+                                    <td>Knee</td>
+                                    <td>Flap</td>
+                                </tr>
+                                <tr *ngIf="user">
+                                    <td>{{down.length}}</td>
+                                    <td>{{down.waist}}</td>
+                                    <td>{{down.thighs}}</td>
+                                    <td>{{down.bass}}</td>
+                                    <td>{{down.seat}}</td>
+                                    <td>{{down.knee}}</td>
+                                    <td>{{down.flap}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

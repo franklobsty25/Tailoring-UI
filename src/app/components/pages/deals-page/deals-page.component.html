@@ -1,0 +1,152 @@
+<div class="page-title-area" *ngFor="let Content of pageTitle;" style="background-image: url({{Content.bgImage}});">
+    <div class="container">
+        <h1>{{Content.title}}</h1>
+    </div>
+</div>
+
+<div class="deals-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 col-lg-8 col-md-12">
+                <div class="marxa-grid-sorting row align-items-center">
+                    <div class="col-lg-6 col-md-6 result-count">
+                        <p>We found <span class="count">{{len}}</span> designs available for you</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 ordering">
+                        <div class="select-box">
+                            <label>Sort By:</label>
+                            <select (change)="querySearch($event)">
+                                <option>Default</option>
+                                <option value="">Popularity</option>
+                                <option value="">Latest</option>
+                                <option value="{{min}}" *ngIf="min">Price: low to high</option>
+                                <option value="{{max}}" *ngIf="max">Price: high to low</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-sm-6 col-md-6" *ngFor="let product of products | paginate: { itemsPerPage: 12, currentPage: dealsGrid }">
+                        <div class="single-deals-box">
+                            <div class="deals-image">
+                                <a [routerLink]="['/deals-details', product._id]" class="d-block">
+                                    <img src="{{environment.apiUrl}}/images/design/{{product.image}}" alt="{{product.image}}">
+                                </a>
+                                <a href="javascript:void(0)" class="bookmark-save"><i class='bx bx-heart'></i></a>
+                                <div class="discount" *ngIf="product.discount > 0">{{product.discount}}% OFF</div>
+                                <!-- <a routerLink="/{{Content.detailsLink}}" class="show-coupon-code" target="_blank" ngxClipboard [cbContent]="[Content.couponCode]" [container]="container" tooltip="Click to Copy" placement="right" show-delay="100" *ngIf="Content.couponCode">Show Coupon Code</a> -->
+                            </div>
+                            <div class="deals-content">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="rating" *ngIf="product.reviews.length > 0">
+                                        <span *ngIf="product.reviews.length == 1"><i class="{{ratingOneStar.icon}}"></i></span>
+                                        <span *ngIf="product.reviews.length == 2"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingTwoStars"></i></span>
+                                        <span *ngIf="product.reviews.length == 3"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingThreeStars"></i></span>
+                                        <span *ngIf="product.reviews.length == 4"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingFourStars"></i></span>
+                                        <span *ngIf="product.reviews.length >= 5"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingStars"></i></span>
+                                        <span class="count">({{product.reviews.length}})</span>
+                                    </div>
+                                    <!-- <div class="status">
+                                        <span *ngIf="Content.trending"><i class='bx bx-trending-up'></i> {{Content.trending}}</span>
+                                    </div> -->
+                                </div>
+                                <small>GHS {{product.xsmallSize}}.00 - GHS {{product.xxlargeSize}}.00</small>
+                                <span class="location"><i class='bx bxs-time'></i>Delivery time: {{product.duration}} days</span>
+                            </div>
+                            <div class="box-footer">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="price">
+                                        <span class="new-price"><a [routerLink]="['/deals-details', product._id]">{{product.name}}</a></span>
+                                        <!-- <span class="old-price" *ngIf="Content.oldPrice">{{Content.oldPrice}}</span> -->
+                                    </div>
+                                    <a [routerLink]="['/deals-details', product._id]" class="details-btn">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="pagination-area text-center">
+                            <pagination-controls previousLabel="" nextLabel="" (pageChange)="dealsGrid = $event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-12">
+                <aside class="widget-area">
+                    <div class="widget widget_search">
+                        <form class="search-form">
+                            <label>
+                                <span class="screen-reader-text">Search for:</span>
+                                <input type="search" class="search-field" placeholder="Search..." (keyup)="querySearch($event)">
+                            </label>
+                            <button type="submit"><i class="bx bx-search-alt"></i></button>
+                        </form>
+                    </div>
+                    <div class="widget widget_categories">
+                        <h3 class="widget-title">Category</h3>
+                        <ul>
+                            <li><input type="radio" id="men" name="category" value="Men" (change)="querySearch($event)"> &nbsp;<label for="men"> Men</label> <i class='bx bx-male'></i></li>
+                            <li><input type="radio" id="women" name="category" value="Women" (change)="querySearch($event)"> &nbsp;<label for="women"> Women</label> <i class='bx bx-female'></i></li>
+                            <li><input type="radio" id="kids" name="category" value="Kids" (change)="querySearch($event)"> &nbsp;<label for="kids"> Baby and Kids</label> <i class='bx bxs-baby-carriage'></i></li>
+                        </ul>
+                    </div>
+                    <!-- <div class="widget widget_stores">
+                        <h3 class="widget-title">Stores</h3>
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="excavator" name="excavator" value="Excavator">
+                                <label for="excavator">Excavator <span class="count">(0)</span></label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="theBird" name="theBird" value="The Bird">
+                                <label for="theBird">The Bird <span class="count">(1)</span></label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="tripleOne" name="tripleOne" value="Triple One">
+                                <label for="tripleOne">Triple One <span class="count">(2)</span></label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="hiTech" name="hiTech" value="Hi-Tech">
+                                <label for="hiTech">Hi-Tech <span class="count">(3)</span></label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="desire" name="desire" value="Desire">
+                                <label for="desire">Desire <span class="count">(4)</span></label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="lorem" name="lorem" value="Lorem">
+                                <label for="lorem">Lorem <span class="count">(5)</span></label>
+                            </li>
+                        </ul>
+                    </div> -->
+                    <div class="widget widget_looking_for">
+                        <h3 class="widget-title">I'm looking for</h3>
+                        <ul>
+                            <li>
+                                <input type="radio" id="all" name="lookingFor" (change)="getAllProductsList()">
+                                <label for="all">All</label>
+                            </li>
+                            <!-- <li>
+                                <input type="radio" id="discount" name="lookingFor" value="1" (change)="queryDiscount($event)">
+                                <label for="discount">Discount</label>
+                            </li> -->
+                            <li>
+                                <input type="radio" id="dealsOnly" name="lookingFor" value="0" (change)="queryFreeDelivery($event)">
+                                <label for="dealsOnly">Free delivery</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="couponsOnly" name="lookingFor" value="1" (change)="queryDeliveryWithFee($event)">
+                                <label for="couponsOnly">Delivery with fee</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <div class="widget widget_custom_ads">
+                        <a href="#" class="d-block" target="_blank">
+                            <img src="assets/img/custom-ads1.jpg" alt="image">
+                        </a>
+                    </div>-->
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>

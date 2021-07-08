@@ -1,0 +1,218 @@
+<div class="page-title-area" *ngFor="let Content of pageTitle;" style="background-image: url({{Content.bgImage}});">
+    <div class="container">
+        <h1>{{Content.title}}</h1>
+    </div>
+</div>
+
+<section class="deals-details-area ptb-100" *ngIf="product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="deals-details-image-slides">
+                    <owl-carousel-o [options]="dealsDetailsImageSlides">
+                        <ng-template carouselSlide  *ngFor="let image of product.images">
+                            <div class="article-image">
+                                <!-- Default image assets/img/deals/deals1.jpg -->
+                                <img src="{{environment.apiUrl}}/images/design/{{image}}" alt="{{image}}">
+                            </div>
+                        </ng-template>
+                        <!-- <ng-template carouselSlide>
+                            <div class="article-image">
+                                <img src="assets/img/deals/deals2.jpg" alt="image">
+                            </div>
+                        </ng-template>
+                        <ng-template carouselSlide>
+                            <div class="article-image">
+                                <img src="assets/img/deals/deals3.jpg" alt="image">
+                            </div>
+                        </ng-template> -->
+                    </owl-carousel-o>
+                </div>
+                <div class="deals-details-content">
+                    <h3>{{product.name}}</h3>
+                    <div class="rating d-flex align-items-center" *ngIf="product.reviews.length > 0">
+                        <span *ngIf="product.reviews.length == 1"><i class="{{ratingOneStar.icon}}"></i></span>
+                        <span *ngIf="product.reviews.length == 2"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingTwoStars"></i></span>
+                        <span *ngIf="product.reviews.length == 3"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingThreeStars"></i></span>
+                        <span *ngIf="product.reviews.length == 4"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingFourStars"></i></span>
+                        <span *ngIf="product.reviews.length >= 5"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingStars"></i></span>
+                        <span class="rating-count">({{product.reviews.length}})</span>
+                    </div>
+                    <ul class="d-flex align-items-center">
+                        <li class="phone-number">
+                            <a [routerLink]="['/checkout', productId]"><i class="bx bx-money"></i>GHS {{product.xsmallSize}}.00 - GHS {{product.xxlargeSize}}.00</a>
+                        </li>
+                        <!-- <li class="location">
+                            <i class="bx bx-map"></i>
+                            <span>Location</span>
+                            New York, USA
+                        </li> -->
+                    </ul>
+                </div>
+                <div class="deals-details-desc">
+                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p><strong>1.</strong> Complimentary ground shipping within 1 to 7 business days<br>
+                        <strong>2.</strong> In-store collection available within 1 to 7 business days<br>
+                        <strong>3.</strong> Next-day and Express delivery options also available<br>
+                        <strong>4.</strong> Purchases are delivered in an orange box tied with a Bolduc ribbon, with the exception<br>
+                        <strong>5.</strong> See the delivery FAQs for details on shipping methods, costs and delivery times
+                    </p> -->
+                    <h3>Descriptions</h3>
+                    <p>{{product.description}}</p>
+                    <ul>
+                        <li>Xtra small measurement cost: <strong>GHS {{product.xsmallSize}}.00</strong>&nbsp;&nbsp;<input type="radio" name="price" value="{{product.xsmallSize}}" (change)="onPriceChange($event)"></li>
+                        <li>Small measurement cost: <strong>GHS {{product.smallSize}}.00</strong>&nbsp;&nbsp;<input type="radio" name="price" value="{{product.smallSize}}" (change)="onPriceChange($event)"></li>
+                        <li>Medium measurement cost: <strong>GHS {{product.mediumSize}}.00</strong>&nbsp;&nbsp;<input type="radio" name="price" value="{{product.mediumSize}}" (change)="onPriceChange($event)"></li>
+                        <li>Large measurement cost: <strong>GHS {{product.largeSize}}.00</strong>&nbsp;&nbsp;<input type="radio" name="price" value="{{product.largeSize}}" (change)="onPriceChange($event)"></li>
+                        <li>Xtra large measurement cost: <strong>GHS {{product.xlargeSize}}.00</strong>&nbsp;&nbsp;<input type="radio" name="price" value="{{product.xlargeSize}}" (change)="onPriceChange($event)"></li>
+                        <li>XXtra large measurement cost: <strong>GHS {{product.xxlargeSize}}.00</strong>&nbsp;&nbsp;<input type="radio" name="price" value="{{product.xxlargeSize}}" (change)="onPriceChange($event)"></li>
+                    </ul>
+                    <small>Please select your body size measurement before proceeding.</small>
+                    <blockquote class="wp-block-quote">
+                        <p>Please price is subject to change depending on body measurements. Example: L, XL, XXL, XXXL.</p>
+                        <cite>Tailor</cite>
+                    </blockquote>
+                </div>
+                <div class="deals-details-review-comments">
+                    <div class="user-review" *ngFor="let review of product.reviews">
+                        <img src="{{review.photoUrl}}" alt="{{review.name}}">
+                        <div class="review-rating">
+                            <div class="review-stars">{{review.rating}}
+                                <span *ngIf="review.rating == 1"><i class="{{ratingOneStar.icon}}"></i></span>
+                                <span *ngIf="review.rating == 2"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingTwoStars"></i></span>
+                                <span *ngIf="review.rating == 3"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingThreeStars"></i></span>
+                                <span *ngIf="review.rating == 4"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingFourStars"></i></span>
+                                <span *ngIf="review.rating >= 5"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingStars"></i></span>
+                            </div>
+                            <span class="d-inline-block">{{review.name}}</span>
+                        </div>
+                        <!-- <span class="d-block sub-comment">Excellent</span> -->
+                        <p>{{review.review}}</p>
+                    </div>
+                    <div class="user-review" *ngIf="review">
+                        <img src="{{review.photoUrl}}" alt="{{review.name}}">
+                        <div class="review-rating">
+                            <div class="review-stars">{{review.rating}}
+                                <span *ngIf="review.rating == 1"><i class="{{ratingOneStar.icon}}"></i></span>
+                                <span *ngIf="review.rating == 2"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingTwoStars"></i></span>
+                                <span *ngIf="review.rating == 3"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingThreeStars"></i></span>
+                                <span *ngIf="review.rating == 4"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingFourStars"></i></span>
+                                <span *ngIf="review.rating >= 5"><i class="{{Icon.icon}}" *ngFor="let Icon of ratingStars"></i></span>
+                            </div>
+                            <span class="d-inline-block">{{review.name}}</span>
+                        </div>
+                        <!-- <span class="d-block sub-comment">Video Quality!</span> -->
+                        <p>{{review.review}}</p>
+                    </div>
+                </div>
+                <div class="deals-details-review-form">
+                    <h3>Add a review</h3>
+                    <p class="comment-notes">Your email address will not be published. Required fields are marked <span>*</span></p>
+                    <form  novalidate [formGroup]="reviewForm" #rForm="ngForm" (ngSubmit)="addReview()">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" formControlName="rating"><label for="star5"></label>
+                                    <input type="radio" id="star4" name="rating" value="4" formControlName="rating"><label for="star4"></label>
+                                    <input type="radio" id="star3" name="rating" value="3" formControlName="rating"><label for="star3"></label>
+                                    <input type="radio" id="star2" name="rating" value="2" formControlName="rating"><label for="star2"></label>
+                                    <input type="radio" id="star1" name="rating" value="1" formControlName="rating"><label for="star1"></label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Name *" formControlName="name" required>
+                                    <div style="color: red;" *ngIf="formErrors.name">{{formErrors.name}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Email *" formControlName="email" required>
+                                    <div style="color: red;" *ngIf="formErrors.email">{{formErrors.email}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <textarea placeholder="Your review" class="form-control" cols="30" rows="6" spellcheck="false" formControlName="review" required></textarea>
+                                    <div style="color: red;" *ngIf="formErrors.review">{{formErrors.review}}</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <p class="comment-form-cookies-consent">
+                                    <input type="checkbox" id="test1" formControlName="remember">
+                                    <label for="test1">Save my name, email, and website in this browser for the next time I comment.</label>
+                                </p>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <button type="submit" [disabled]="!reviewForm.valid">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <aside class="widget-area">
+                    <div class="widget widget_deals_sidebar">
+                        <div class="price">
+                            <span class="new-price" *ngIf="price">GHS {{price}}.00</span>
+                            <!-- <span class="old-price">$330.00</span> -->
+                        </div>
+                        <div class="buy-now-btn">
+                            <a [routerLink]="['/checkout', productId]" class="default-btn">Order Now</a>
+                            <span (click)="addToCart()"><i class='bx bx-cart bx-flashing'></i> Add to cart</span>
+                        </div>
+                        <ul class="deals-value">
+                            <li *ngIf="product.duration">Delivery time: <span>{{product.duration}} days</span></li>
+                            <li *ngIf="product.discount > 0">Discount <span>{{product.discount}}%</span></li>
+                            <li *ngIf="product.fabric">Fabric <span>{{product.fabric}}</span></li>
+                        </ul>
+                       <!-- <div class="offer-timer">
+                            <p>Time Left - Limited Offer!</p>
+                            <div id="timer" class="flex-wrap d-flex justify-content-center">
+                                <div id="days" class="align-items-center flex-column d-flex justify-content-center">{{days}} <span>Days</span></div>
+                                <div id="hours" class="align-items-center flex-column d-flex justify-content-center">{{hours}} <span>Hours</span></div>
+                                <div id="minutes" class="align-items-center flex-column d-flex justify-content-center">{{minutes}} <span>Minutes</span></div>
+                                <div id="seconds" class="align-items-center flex-column d-flex justify-content-center">{{seconds}} <span>Seconds</span></div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="widget widget_maps">
+                        <h3 class="widget-title">Quote</h3>
+                        <div class="content">
+                            <p>If you haven't found it yet, keep looking. Don't leave. As with all matters of the heart, you'll know it when you find it.</p>
+                        </div>
+                    </div>
+                    <div class="widget widget_author" *ngIf="tailor">
+                        <h3 class="widget-title">About Author</h3>
+                        <div class="content">
+                            <img src="{{photoUrl}}" alt="{{tailor.photoUrl}}">
+                            <h4>{{tailor.firstName}} {{tailor.lastName}}</h4>
+                            <span>{{tailor.company}}</span>
+                            <a routerLink="/contact" class="default-btn">Contact With Me</a>
+                        </div>
+                    </div>
+                    <div class="widget widget_socials_link">
+                        <h3 class="widget-title">Stay Connected</h3>
+                        <ul>
+                            <li><a href="https://web.facebook.com/Tailoringhub-104061068610658" target="_blank"><i class='bx bxl-facebook'></i> Facebook</a></li>
+                            <li><a href="https://twitter.com/home" target="_blank"><i class='bx bxl-twitter'></i> Twitter</a></li>
+                            <li><a href="https://www.linkedin.com/company/tailoringhub" target="_blank"><i class='bx bxl-linkedin'></i> Linkedin</a></li>
+                        </ul>
+                    </div>
+                    <!-- <div class="widget widget_about_store">
+                        <div class="content">
+                            <a routerLink="/stores-details" class="d-inline-block"><img class="m-0" src="assets/img/popular-store/store1.png" alt="image"></a>
+                        </div>
+                    </div> -->
+                </aside>
+            </div>
+            <!-- related products -->
+            <div class="col-lg-8 col-md-12 col-sm-6">
+                <div class="products-area pb-70" style="margin-top: 30px;">
+                    <app-featured-discount-deals [tailorId]="product.tailorId"></app-featured-discount-deals>
+                </div>
+            </div>
+            <!-- related products -->
+        </div>
+    </div>
+</section>

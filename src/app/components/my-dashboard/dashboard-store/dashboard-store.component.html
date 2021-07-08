@@ -1,0 +1,199 @@
+<div class="page-title-area" *ngFor="let Content of pageTitle;" style="background-image: url({{Content.bgImage}});">
+    <div class="container">
+        <h1>{{Content.title}}</h1>
+    </div>
+</div>
+
+<div class="dashboard-area ptb-100">
+    <div class="container">
+        <div class="dashboard-tabs-list">
+            <ul>
+                <li><a routerLink="/dashboard">Dashboard</a></li>
+                <li><a routerLink="/dashboard-profile">Profile</a></li>
+                <li><a routerLink="/dashboard-store" class="active">Custom design</a></li>
+                <li><a routerLink="/dashboard-coupons">Measurement</a></li>
+                <!-- <li><a routerLink="/dashboard-deals">Deals</a></li>
+                <li><a routerLink="/dashboard-vouchers">Vouchers</a></li>
+                <li><a routerLink="/dashboard-agents">Agents</a></li> -->
+                <li><a routerLink="/profile-authentication" (click)="logOut()">Logout</a></li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-12">
+                <div class="dashboard-profile-box" *ngIf="user">
+                    <div class="image">
+                        <img src="{{photoUrl}}" alt="{{user.photoUrl}}">
+                        <span>{{user.firstName}} {{user.lastName}}</span>
+                    </div>
+                    <a (click)="logOut()" class="logout">Log Out</a>
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-md-12">
+                <div class="dashboard-stats">
+                    <form [formGroup]="customForm" #custom="ngForm" (ngSubmit)="customDesign()">
+                        <div class="row">
+                        <div class="alert alert-success" *ngIf="success">{{success}} <strong>24 hours</strong></div>
+                        <div class="alert alert-danger" *ngIf="error">{{error}}</div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Upload your design <span>*</span></label>
+                                    <input type="file" formcontrolName="image" (change)="onFileChange($event)">
+                                    <div *ngIf="f.image.touched && f.image.invalid" style="color: red;">
+                                        <div *ngIf="f.image.errors.required">Design image required.</div>
+                                    </div>
+                                    <div *ngIf="err" style="color: red;">{{err}}</div>
+                                    <small>Image dimension should be 1024 x 640 before uploading.</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Design name <span>*</span></label>
+                                    <input type="text" class="form-control" formControlName="name" required>
+                                    <div *ngIf="f.name.touched && f.name.invalid"  style="color: red;">
+                                        <div *ngIf="f.name.errors.required">Design name is required.</div>
+                                        <div *ngIf="f.name.errors.minlength">Design name should be aleast 3 characters.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Quantity</label>
+                                    <input type="number" class="form-control" value="1" formControlName="quantity">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Fabric type <span>*</span></label>
+                                    <input type="text" class="form-control" formControlName="fabric" required>
+                                    <div *ngIf="f.fabric.touched && f.fabric.invalid" style="color: red;">
+                                        <div *ngIf="f.fabric.errors.required">Fabric type is required.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <button type="submit" class="default-btn" [disabled]="!customForm.valid">Submit design</button>
+                            </div>
+                        </div><br>
+                        <input type="checkbox" (change)="displayMeasurement($event)">&nbsp;<span>Provide measurement if not exist</span>
+                    </form>
+                </div>
+                <hr *ngIf="display">
+                <!-- top measurement -->
+                <div class="dashboard-stats" *ngIf="display">
+                    <h6>Shirt long/short sleeve measurement</h6>
+                    <form [formGroup]="topMeasurementForm" #top="ngForm" (ngSubmit)="onSubmitTopMeasurement()">
+                        <div class="row"><div class="alert alert-success" *ngIf="successTop">{{successTop}}</div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Length <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="length" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Back <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="back" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Sleeve <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="sleeve" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Chest <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="chest" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Around arm <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="aroundArm" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Cuff <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="cuff" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <textarea type="text" cols="30" rows="3" class="form-control" formControlName="additionalNotes" placeholder="Additional notes (Optional)"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <button type="submit" class="default-btn" [disabled]="!topMeasurementForm.valid">Submit shirt</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- top measurement -->
+                <hr *ngIf="display">
+                <!-- down measurement -->
+                <div class="dashboard-stats" *ngIf="display">
+                    <h6>Trouser/shorts measurement</h6>
+                    <form [formGroup]="downMeasurementForm" #down="ngForm" (ngSubmit)="onSubmitDownMeasurement()">
+                        <div class="row"><div class="alert alert-success" *ngIf="successDown">{{successDown}}</div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Length <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="length" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Waist <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="waist" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Thighs <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="thighs" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Bass <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="bass" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Seat <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="seat" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="form-group">
+                                    <label>Knee <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="knee" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>Flap <span>*</span></label>
+                                    <input type="number" class="form-control" formControlName="flap" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <textarea type="text" cols="30" rows="3" class="form-control" formControlName="additionalNotes" placeholder="Additional notes (Optional)"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <button type="submit" class="default-btn" [disabled]="!downMeasurementForm.valid">Submit trouser/shorts</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- down measurement -->
+            </div>
+        </div>
+    </div>
+</div>

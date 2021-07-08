@@ -1,0 +1,27 @@
+<!-- Start Main Banner Area -->
+<div class="main-banner-area">
+    <div class="container-fluid">
+        <div class="main-banner-content" *ngFor="let Content of mainBannerContent;">
+            <h1>{{Content.title}}</h1>
+            <ul class="categories-list">
+                <li *ngFor="let Item of Content.categoriesList"><a [routerLink]="['/stores', Item.title]"><i class="{{Item.icon}}"></i> {{Item.title}}</a></li>
+            </ul>
+            <!-- <a routerLink="/{{Content.buttonLink}}" class="default-btn">{{Content.buttonText}}</a> -->
+        </div>
+        <div class="home-slides">
+            <owl-carousel-o [options]="homeSlides">
+                <ng-template carouselSlide *ngFor="let Content of mainBannerBox;">
+                    <div class="main-banner-box">
+                        <img [src]="Content.image" alt="image">
+                        <div class="content">
+                            <h3>{{Content.title}}</h3>
+                            <p>{{Content.paragraph}}</p>
+                            <a [routerLink]="['/stores', Content.category]" class="default-btn">{{Content.buttonText}}</a>
+                        </div>
+                    </div>
+                </ng-template>
+            </owl-carousel-o>
+        </div>
+    </div>
+</div>
+<!-- End Main Banner Area -->
