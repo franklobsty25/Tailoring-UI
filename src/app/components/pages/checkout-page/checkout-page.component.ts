@@ -457,6 +457,76 @@ export class CheckoutPageComponent implements OnInit {
       }
 
     }
+
+    // set order
+    setOrder(data) {
+      let actualPrice = Number(data.price) - Number((data.price * 0.05).toFixed());
+      let duration = new Date();
+      duration.setDate(duration.getDate() + data.duration);
+      this.order = {
+        name: data.name,
+        image: data.image,
+        fabric: data.fabric,
+        category: data.category,
+        quantity: data.quantity,
+        price: actualPrice,
+        total: data.total,
+        orderDate: new Date().toDateString(),
+        deliveryDate: duration.toDateString(),
+        productId: data._id || data.productId,
+        tailorId: data.tailorId
+      };
+      this.orders.push(this.order);
+      this.metadata = {
+        'Design ID': this.order.productId , 
+        'Design Name': this.order.name, 
+        'Design Price': this.order.total
+      };
+    }
+
+    // payment settings
+    paymentInit() {
+      console.log('Payment initialized');
+    }
+
+    paymentDone(ref: any) {
+      const title = 'Payment successful.';
+      console.log(title, ref);
+      this.orders.forEach(order => {
+        this.authService.createUserOrder(order).subscribe(res => {
+          if (res.success)
+          console.log(res.status);
+        },
+        err => {
+          if (err.status === 403)
+          this.router.navigate(['profile-authentication']);
+        });
+        });
+        // update order profile
+        this.authService.updateProfile(this.user).subscribe(res => {
+          if (res.success) {
+            this.onSubmitTopMeasurement();
+            this.onSubmitDownMeasurement();
+            this.userFormDirective.resetForm();
+            if (this.carts.length > 0) {
+              this.authService.clearOrderedCarts().subscribe(res => {
+                if (res.success)
+                console.log(res.status);
+              })
+            }
+          }
+        },
+        err => {
+          console.log(err);
+        });
+      
+      this.router.navigate(['']);
+    }
+
+    paymentCancel() {
+      console.log('payment failed');
+    }
+
     // submit user top measurement
     onSubmitTopMeasurement() {
       if (this.authService.isLoggedIn) {
@@ -527,74 +597,6 @@ export class CheckoutPageComponent implements OnInit {
       else {
         this.router.navigate(['profile-authentication']);
       }
-    }
-
-    setOrder(data) {
-      let actualPrice = Number(data.price) - Number((data.price * 0.05).toFixed());
-      let duration = new Date();
-      duration.setDate(duration.getDate() + data.duration);
-      this.order = {
-        name: data.name,
-        image: data.image,
-        fabric: data.fabric,
-        category: data.category,
-        quantity: data.quantity,
-        price: actualPrice,
-        total: data.total,
-        orderDate: new Date().toDateString(),
-        deliveryDate: duration.toDateString(),
-        productId: data._id || data.productId,
-        tailorId: data.tailorId
-      };
-      this.orders.push(this.order);
-      this.metadata = {
-        'Design ID': this.order.productId , 
-        'Design Name': this.order.name, 
-        'Design Price': this.order.total
-      };
-    }
-
-    // payment settings
-    paymentInit() {
-      console.log('Payment initialized');
-    }
-
-    paymentDone(ref: any) {
-      const title = 'Payment successful.';
-      console.log(title, ref);
-      this.orders.forEach(order => {
-        this.authService.createUserOrder(order).subscribe(res => {
-          if (res.success)
-          console.log(res.status);
-        },
-        err => {
-          if (err.status === 403)
-          this.router.navigate(['profile-authentication']);
-        });
-        });
-        // update order profile
-        this.authService.updateProfile(this.user).subscribe(res => {
-          if (res.success) {
-            this.onSubmitTopMeasurement();
-            this.onSubmitDownMeasurement();
-            this.userFormDirective.resetForm();
-            if (this.carts) {
-              this.authService.clearOrderedCarts().subscribe(res => {
-                if (res.success)
-                console.log(res.status);
-              })
-            }
-          }
-        },
-        err => {
-          console.log(err);
-        });
-      
-      this.router.navigate(['']);
-    }
-
-    paymentCancel() {
-      console.log('payment failed');
     }
 
     pageTitle = [
