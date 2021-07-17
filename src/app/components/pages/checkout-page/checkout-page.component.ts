@@ -554,36 +554,6 @@ export class CheckoutPageComponent implements OnInit {
       };
     }
 
-    placeOrder() {
-      this.orders.forEach(order => {
-      this.authService.createUserOrder(order).subscribe(res => {
-        if (res.success)
-        console.log(res.status);
-      },
-      err => {
-        if (err.status === 403)
-        this.router.navigate(['profile-authentication']);
-      });
-      });
-      // update order profile
-      this.authService.updateProfile(this.user).subscribe(res => {
-        if (res.success) {
-          this.onSubmitTopMeasurement();
-          this.onSubmitDownMeasurement();
-          this.userFormDirective.resetForm();
-          if (this.carts) {
-            this.authService.clearOrderedCarts().subscribe(res => {
-              if (res.success)
-              console.log(res.status);
-            })
-          }
-        }
-      },
-      err => {
-        console.log(err);
-      });
-    }
-
     // payment settings
     paymentInit() {
       console.log('Payment initialized');
@@ -592,8 +562,34 @@ export class CheckoutPageComponent implements OnInit {
     paymentDone(ref: any) {
       const title = 'Payment successful.';
       console.log(title, ref);
-      this.placeOrder();
-      setTimeout(()=>{window.location.reload()},0.001);
+      this.orders.forEach(order => {
+        this.authService.createUserOrder(order).subscribe(res => {
+          if (res.success)
+          console.log(res.status);
+        },
+        err => {
+          if (err.status === 403)
+          this.router.navigate(['profile-authentication']);
+        });
+        });
+        // update order profile
+        this.authService.updateProfile(this.user).subscribe(res => {
+          if (res.success) {
+            this.onSubmitTopMeasurement();
+            this.onSubmitDownMeasurement();
+            this.userFormDirective.resetForm();
+            if (this.carts) {
+              this.authService.clearOrderedCarts().subscribe(res => {
+                if (res.success)
+                console.log(res.status);
+              })
+            }
+          }
+        },
+        err => {
+          console.log(err);
+        });
+      
       this.router.navigate(['']);
     }
 

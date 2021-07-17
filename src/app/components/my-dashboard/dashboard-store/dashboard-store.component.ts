@@ -247,7 +247,7 @@ export class DashboardStoreComponent implements OnInit {
 
     pageTitle = [
         {
-            bgImage: `assets/img/page-title/page-title4.jpg`,
+            bgImage: `assets/img/page-title/banner.jpg`, //page-title4.jpg
             title: `My Dashboard`,
         }
     ]

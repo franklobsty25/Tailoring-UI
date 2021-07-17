@@ -88,7 +88,7 @@ export class DashboardCouponsComponent implements OnInit {
 
     pageTitle = [
         {
-            bgImage: `assets/img/page-title/page-title1.jpg`,
+            bgImage: `assets/img/page-title/banner.jpg`, //page-title1.jpg
             title: `My Dashboard`,
         }
     ]

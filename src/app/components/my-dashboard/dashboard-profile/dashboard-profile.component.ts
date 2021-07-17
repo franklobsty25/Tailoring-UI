@@ -131,7 +131,7 @@ export class DashboardProfileComponent implements OnInit {
 
     pageTitle = [
         {
-            bgImage: `assets/img/page-title/page-title3.jpg`,
+            bgImage: `assets/img/page-title/banner.jpg`, //page-title3.jpg
             title: `My Dashboard`,
         }
     ]

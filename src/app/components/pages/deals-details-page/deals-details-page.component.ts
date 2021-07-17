@@ -170,7 +170,6 @@ export class DealsDetailsPageComponent implements OnInit {
                 this.authService.addToUserCart(this.cart).subscribe((res) => {
                     if (res.success) {
                         window.alert(res.status);
-                        setTimeout(() => {window.location.reload()}, 1000);
                     }
                 },
                 err => {
