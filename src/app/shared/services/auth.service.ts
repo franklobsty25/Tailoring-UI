@@ -589,7 +589,7 @@ export class AuthService {
    signOut() {
      localStorage.removeItem('user');
      this.http.get(`${this.environment.apiUrl}/users/logout`);
-     this.router.navigate(['']);
+     this.router.navigate(['profile-authentication']);
      if (this.socialAuthService)
      this.socialAuthService.signOut();
    }
