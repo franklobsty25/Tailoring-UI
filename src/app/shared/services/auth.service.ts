@@ -23,7 +23,7 @@ export class AuthService {
   socialUser: SocialUser;
   user: User;
 
-  constructor( 
+  constructor(
     private http: HttpClient,
     public router: Router,
     public ngZone: NgZone,
@@ -46,6 +46,7 @@ export class AuthService {
     return this.http.post<any>(`${this.environment.apiUrl}/users/register`, user, httpOptions)
     .pipe(
       map((res) => {
+        localStorage.setItem('user', JSON.stringify(res));
         return res;
       })
     );
@@ -593,6 +594,6 @@ export class AuthService {
      if (this.socialAuthService)
      this.socialAuthService.signOut();
    }
-     
+
 
 }

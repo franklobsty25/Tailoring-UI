@@ -17,7 +17,7 @@ export class ProfileAuthenticationPageComponent implements OnInit {
     rError: string;
     @ViewChild('registerForm') registerFormDirective;
 
-    constructor( 
+    constructor(
         private router: Router,
         public authService: AuthService,
         private cookieService: CookieService,
@@ -29,7 +29,7 @@ export class ProfileAuthenticationPageComponent implements OnInit {
 
     onLogin(form) {
         this.authService.signIn(form.loginEmail, form.loginPassword)
-        .subscribe((res) => { 
+        .subscribe((res) => {
             if (res.success) {
                 setTimeout(()=>{window.location.reload()},0.001);
                 this.router.navigate(['']);
@@ -57,8 +57,10 @@ export class ProfileAuthenticationPageComponent implements OnInit {
         console.log(this.user);
         this.authService.signUp(this.user).subscribe((res) => {
             if (res.success) {
-                this.rSuccess = res.status;
-                this.rError = '';
+                setTimeout(()=>{window.location.reload()},0.001);
+                this.router.navigate(['']);
+                //this.rSuccess = res.status;
+                //this.rError = '';
                 this.registerFormDirective.resetForm();
             }
             else {
