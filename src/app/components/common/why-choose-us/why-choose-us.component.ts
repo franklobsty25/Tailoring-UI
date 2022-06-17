@@ -39,7 +39,7 @@ export class WhyChooseUsComponent implements OnInit {
         {
             title: `Discover even more deals with Cash Back`,
             buttonText: `Join Now`,
-            buttonLink: `profile-authentication`
+            buttonLink: `http://tailor.colonkoded.com`
         }
     ]
 

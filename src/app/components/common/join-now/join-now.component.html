@@ -4,7 +4,7 @@
         <div class="join-now-content" *ngFor="let Content of joinNowContent;">
             <h2>{{Content.title}}</h2>
             <p>{{Content.paragraph}}</p>
-            <a href="http://tailor.tailoringhub.com" target="_blank" class="default-btn">{{Content.buttonText}}</a>
+            <a href="{{Content.buttonLink}}" target="_blank" class="default-btn">{{Content.buttonText}}</a>
         </div>
     </div>
 </div>

@@ -17,7 +17,7 @@ export class JoinNowComponent implements OnInit {
             title: `Join tailoringhub for Free`,
             paragraph: `Register as a tailor and upload your designs to the world for your customers to place order and sow for them.`,
             buttonText: `Join Now`,
-            buttonLink: `profile-authentication`
+            buttonLink: `http://tailor.colonkoded.com`
         }
     ]
 

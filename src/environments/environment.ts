@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  apiUrl: 'http://api.tailoringhub.com:3000'
+  apiUrl: 'http://167.172.138.233:3000'
 };
 
 /*
