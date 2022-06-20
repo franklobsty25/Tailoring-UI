@@ -56,7 +56,6 @@ export class ProfileAuthenticationPageComponent implements OnInit {
         console.log(this.user);
         this.authService.signUp(this.user).subscribe((res) => {
             if (res.success) {
-                setTimeout(()=>{window.location.reload()},0.001);
                 this.router.navigate(['']);
                 //this.rSuccess = res.status;
                 //this.rError = '';
