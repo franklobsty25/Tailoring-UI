@@ -31,7 +31,6 @@ export class ProfileAuthenticationPageComponent implements OnInit {
         this.authService.signIn(form.loginEmail, form.loginPassword)
         .subscribe((res) => {
             if (res.success) {
-                setTimeout(()=>{window.location.reload()},0.001);
                 this.router.navigate(['']);
                 if (form.remember) {
                     this.cookieService.set('email', form.loginEmail);
